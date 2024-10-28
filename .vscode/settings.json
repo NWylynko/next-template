@@ -1,0 +1,17 @@
+{
+  // eslint
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "editor.formatOnSave": true,
+
+  // file grouping
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    ".env": ".env.example, .env.local",
+    "next.config.ts": ".eslintrc.json, .gitignore, .nvmrc, components.json, drizzle.config.ts, next-env.d.ts, postcss.config.cjs, tailwind.config.ts, tsconfig.json, tsconfig.tsbuildinfo",
+  },
+}
