@@ -1,4 +1,3 @@
-import { viewAccount } from "@/server/api/account";
 import { auth } from "@clerk/nextjs/server";
 
 export const getUser = async () => {
@@ -8,22 +7,14 @@ export const getUser = async () => {
     return null;
   }
 
-  return user
-}
-
-export const getUserWithMetadata = async () => {
-  const user = await getUser();
-
-  if (!user) {
-    return null;
+  if (user.sessionClaims.metadata === undefined) {
+    throw new Error("You need to add public metadata as metadata in the jwt session")
   }
-
-  const account = await viewAccount(user.userId);
 
   return {
     ...user,
-    metadata: account.metadata,
-    __account: account
+    userId: user.userId,
+    metadata: user.sessionClaims.metadata as CustomJwtSessionClaims["metadata"]
   }
 }
 
@@ -34,20 +25,13 @@ export const getUserThatExists = async () => {
     throw new Error("User not loggedin or not found");
   }
 
-  return {
-    ...user,
-    userId: user.userId
+  if (user.sessionClaims.metadata === undefined) {
+    throw new Error("You need to add public metadata as metadata in the jwt session")
   }
-}
-
-export const getUserThatExistsWithMetadata = async () => {
-  const user = await getUserThatExists();
-
-  const account = await viewAccount(user.userId);
 
   return {
     ...user,
-    metadata: account.metadata,
-    __account: account
+    userId: user.userId,
+    metadata: user.sessionClaims.metadata as CustomJwtSessionClaims["metadata"]
   }
 }

@@ -9,7 +9,7 @@ export default async function AdminHomePage() {
       <span>Admin Portal</span>
       <ul>
         {users.map((user) => (
-          <li key={user.id}>{user.firstName} {user.lastName} - {JSON.stringify(user.metadata)}</li>
+          <li key={user.id}>{user.firstName} {user.lastName} - {JSON.stringify(user.publicMetadata)}</li>
         ))}
       </ul>
     </main>

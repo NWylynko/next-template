@@ -1,11 +1,11 @@
-import { getUserWithMetadata } from "@/services/clerk";
+import { getUser } from "@/services/clerk";
 import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { PropsWithChildren } from "react";
 
 export default async function AdminSiteLayout(props: PropsWithChildren) {
-  const account = await getUserWithMetadata();
+  const account = await getUser();
 
   if (!account) {
     notFound();
